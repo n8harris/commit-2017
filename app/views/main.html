@@ -1,0 +1,11 @@
+
+<h2>Commit 2017</h2>
+
+<form>
+  <input placeholder="I commit to..." ng-model="commit">
+  <input placeholder="Email" ng-model="email">
+  <button type="submit" ng-click="addCommit(commit, email);commit=null;email=null;">Commit!</button>
+</form>
+
+<p>{{numHoursCommited}}</p>
+<p class="alert alert-danger" ng-show="err">{{err}}</p>
