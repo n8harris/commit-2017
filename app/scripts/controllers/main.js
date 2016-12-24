@@ -8,8 +8,11 @@
  * Controller of the commit2017App
  */
 angular.module('commit2017App')
-  .controller('MainCtrl', function ($scope, Ref, $q, NUM_WEEKS_YEAR, Profanity) {
+  .controller('MainCtrl', function ($scope, Ref, $q, NUM_WEEKS_YEAR, NUM_MONTHS_YEAR, NUM_DAYS_YEAR, Profanity) {
     removeError();
+    $scope.showSettings = false;
+    $scope.numHours = 1;
+    $scope.frequency = 2;
     Ref.child('Counter').child('numHoursCommited').on('value', function(snapshot) {
       var hours = snapshot.val();
       if (hours){
@@ -27,13 +30,21 @@ angular.module('commit2017App')
         } else if (Profanity.containsProfanity(commit)) {
           setError("Please watch your language :)");
         } else {
-          var hours = 1;
-          pushCommit(commit, email, publicCommit);
+          var hours = getHours($scope.numHours, $scope.frequency);
+          pushCommit(commit, email, publicCommit, $scope.numHours, $scope.frequency);
           incrementCounter(hours);
         }
       } else {
         setError("Please enter email and what you are committing to do");
       }
+    };
+
+    $scope.closeOverlay = function() {
+      $scope.showSettings = false;
+    };
+
+    $scope.openOverlay = function() {
+      $scope.showSettings = true;
     };
 
     function getCounter() {
@@ -44,16 +55,17 @@ angular.module('commit2017App')
       return defered.promise;
     }
 
-    function pushCommit(commit, email, publicCommit) {
+    function pushCommit(commit, email, publicCommit, hours, frequency) {
       Ref.child('Submissions').push({
         email: email,
         commit: commit,
-        public: publicCommit
+        public: publicCommit,
+        hours: hours,
+        frequency: frequency
       });
     }
 
     function incrementCounter(hours) {
-      hours *= NUM_WEEKS_YEAR;
       Ref.child('Counter').transaction(function(counter) {
           if (counter) {
               counter.numHoursCommited = counter.numHoursCommited + hours;
@@ -61,6 +73,24 @@ angular.module('commit2017App')
           }
           return counter;
       });
+    }
+
+    function getHours(hours, frequency) {
+      switch(frequency){
+        case 1:
+          hours = hours * NUM_DAYS_YEAR;
+          break;
+        case 2:
+          hours = hours * NUM_WEEKS_YEAR;
+          break;
+        case 3:
+          hours = hours * NUM_MONTHS_YEAR;
+          break;
+        default:
+          hours = hours * NUM_DAYS_YEAR;
+          break;
+      }
+      return hours;
     }
 
     function emailIsValid(email) {

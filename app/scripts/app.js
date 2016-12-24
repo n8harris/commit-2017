@@ -20,4 +20,4 @@ angular.module('commit2017App', [
     'firebase.ref'
   ]).constant('NUM_DAYS_YEAR', 365)
   .constant('NUM_WEEKS_YEAR', 52)
-  .constant('NUM_MONTHS_YEAR', 52);
+  .constant('NUM_MONTHS_YEAR', 12);

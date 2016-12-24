@@ -8,7 +8,10 @@
 <div class="row">
   <div class="col-sm-12 form-wrapper">
     <form>
-      <input class="text-box" placeholder="I commit to..." ng-model="commit">
+      <div class="commit-input-wrapper">
+        <div class="settings" ng-click="openOverlay()"></div>
+        <input class="text-box commit" placeholder="I commit to..." ng-model="commit">
+      </div>
       <input class="text-box" placeholder="Email" ng-model="email">
       <div class="col-sm-10 public-confirm">
         <div class="col-xs-8">
@@ -24,5 +27,29 @@
       <button type="submit" class="orange-btn" ng-click="addCommit(commit, email, public);commit=null;email=null;public=false;">Commit!</button>
     </form>
     <p class="alert alert-danger" ng-show="error">{{error}}</p>
+  </div>
+</div>
+
+<div class="overlay" ng-show="showSettings">
+  <div class="close-btn" ng-click="closeOverlay()">
+    <i class="commit-icon glyphicon glyphicon-remove"></i>
+  </div>
+  <div class="container settings-form-wrapper">
+    <div class="row">
+      <div class="col-sm-12">
+        <h2>How many hours will you commit?</h2>
+        <input class="text-box" placeholder="e.g. 3" ng-model="numHours">
+        <h2 class="often-header">How often?</h2>
+        <div class="col-sm-4">
+          <button ng-click="frequency = 1;" ng-class="frequency == 1 ? 'green-btn green-active' : 'green-btn'">Every Day</button>
+        </div>
+        <div class="col-sm-4">
+          <button ng-click="frequency = 2;" ng-class="frequency == 2 ? 'green-btn green-active' : 'green-btn'">Every Week</button>
+        </div>
+        <div class="col-sm-4">
+          <button ng-click="frequency = 3;" ng-class="frequency == 3 ? 'green-btn green-active' : 'green-btn'">Every Month</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

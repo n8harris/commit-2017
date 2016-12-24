@@ -24,6 +24,7 @@ body {
 html, body {
   padding: 0;
   width: 100%;
+  height: 100%;
   min-height: 100%;
 }
 
@@ -32,12 +33,54 @@ p {
   color: #fff;
 }
 
+h2 {
+  font-family: 'Roboto Slab', serif;
+  color: #fff;
+}
+
 .page-wrapper {
+  margin-bottom: 30px;
   .header {
     margin-top: 10px;
     text-align: center;
     .logo {
       width: 150px;
+    }
+  }
+
+  .text-box {
+    width: 100%;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 100;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 0;
+    font-size: 2em;
+    padding: 0.5em;
+    outline: none;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    text-align: center;
+    background: none;
+    color: #fff;
+    border-bottom: 2px solid #fff;
+    text-align: left;
+    &::-webkit-input-placeholder {
+       color: #fff;
+    }
+
+    &:-moz-placeholder { /* Firefox 18- */
+       color: #fff;
+    }
+
+    &::-moz-placeholder {  /* Firefox 19+ */
+       color: #fff;
+    }
+
+    &:-ms-input-placeholder {
+       color: #fff;
     }
   }
 
@@ -62,38 +105,23 @@ p {
   .form-wrapper {
     text-align: center;
     margin: 0 auto;
-    .text-box {
-      font-family: 'Roboto Slab', serif;
-      font-weight: 100;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
-      border: 0;
-      font-size: 2em;
-      padding: 0.5em;
-      outline: none;
-      box-shadow: none;
-      -webkit-box-shadow: none;
-      -moz-box-shadow: none;
-      text-align: center;
-      background: none;
-      color: #fff;
-      border-bottom: 2px solid #fff;
-      text-align: left;
-      &::-webkit-input-placeholder {
-         color: #fff;
-      }
 
-      &:-moz-placeholder { /* Firefox 18- */
-         color: #fff;
-      }
-
-      &::-moz-placeholder {  /* Firefox 19+ */
-         color: #fff;
-      }
-
-      &:-ms-input-placeholder {
-         color: #fff;
+    .commit-input-wrapper {
+      position: relative;
+      .settings {
+        cursor: pointer;
+        position: absolute;
+        right: 0.3em;
+        background-image: url(../images/gear.svg);
+        background-repeat: no-repeat;
+        background-size: 1.5em;
+        height: 1.5em;
+        /* top: 1.5em; */
+        background-position: left center;
+        padding-right: 1.5em;
+        top: 50%;
+        transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
       }
     }
 
@@ -213,6 +241,61 @@ p {
 
     .alert {
       margin-top: 20px;
+    }
+  }
+
+  .green-btn {
+    appearance: none;
+    -webkit-appearance: none;
+    border: 2px solid #8ce196;
+    width: 100%;
+    margin-top: 40px;
+    font-family: 'Roboto Slab', serif;
+    color: #ffffff;
+    font-size: 20px;
+    background: transparent;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+    transition: background 0.4s;
+
+    &.green-active {
+      background: #8ce196;
+      text-decoration: none;
+    }
+
+    &:hover {
+      background: #8ce196;
+      text-decoration: none;
+    }
+  }
+
+  .overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    background: rgba(10,10,10,0.8);
+    .close-btn {
+      z-index: 3;
+      position: absolute;
+      right: 1em;
+      top: 1em;
+      i {
+        cursor: pointer;
+        font-size: 2em;
+        color: #fff;
+      }
+    }
+    .settings-form-wrapper {
+      padding-top: 140px;
+      z-index: 3;
+      text-align: center;
+      margin: 0 auto;
+      .often-header {
+        margin-top: 50px;
+      }
     }
   }
 

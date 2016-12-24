@@ -11,12 +11,12 @@
     "angular-resource": "^1.3.0",
     "angular-route": "^1.3.0",
     "angular-sanitize": "^1.3.0",
-    "angular-touch": "^1.3.0"
+    "angular-touch": "^1.3.0",
+    "ng-profanity": "~0.0.8"
   },
   "devDependencies": {
     "mockfirebase": "0.11.0",
-    "angular-mocks": "^1.3.0",
-    "ng-profanity": "~0.0.8"
+    "angular-mocks": "^1.3.0"
   },
   "appPath": "app",
   "moduleName": "commit2017App"
