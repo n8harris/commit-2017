@@ -14,7 +14,10 @@ angular.module('commit2017App', [
     'ngResource',
     'ngRoute',
     'ngSanitize',
+    'ngProfanity',
     'ngTouch',
     'firebase',
     'firebase.ref'
-  ]);
+  ]).constant('NUM_DAYS_YEAR', 365)
+  .constant('NUM_WEEKS_YEAR', 52)
+  .constant('NUM_MONTHS_YEAR', 52);
