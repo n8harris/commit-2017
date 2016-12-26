@@ -8,15 +8,15 @@
  * Controller of the commit2017App
  */
 angular.module('commit2017App')
-  .controller('MainCtrl', function ($scope, Ref, $q, NUM_WEEKS_YEAR, NUM_MONTHS_YEAR, NUM_DAYS_YEAR, Profanity) {
+  .controller('MainCtrl', function ($scope, Ref, $q, NUM_WEEKS_YEAR, NUM_MONTHS_YEAR, NUM_DAYS_YEAR, Profanity, $rootScope, abbreviate_number) {
     removeError();
-    $scope.showSettings = false;
+    $rootScope.showSettings = false;
     $scope.numHours = 1;
     $scope.frequency = 2;
     Ref.child('Counter').child('numHoursCommited').on('value', function(snapshot) {
       var hours = snapshot.val();
       if (hours){
-        $scope.numHoursCommited = hours;
+        $scope.numHoursCommited = abbreviate_number(hours);
         $scope.$apply();
       }
     });
@@ -40,11 +40,11 @@ angular.module('commit2017App')
     };
 
     $scope.closeOverlay = function() {
-      $scope.showSettings = false;
+      $rootScope.showSettings = false;
     };
 
     $scope.openOverlay = function() {
-      $scope.showSettings = true;
+      $rootScope.showSettings = true;
     };
 
     function getCounter() {

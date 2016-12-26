@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('commit2017App')
-  .filter('abbreviate_number', function() {
+  .service('abbreviate_number', function() {
     return function (value) {
         var newValue = value;
         var shortNum = value;
@@ -20,6 +20,10 @@ angular.module('commit2017App')
             }
             newValue = shortValue+suffixes[suffixNum];
         }
-        return newValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        if (newValue){
+          return newValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        } else {
+          return newValue;
+        }
     };
   });

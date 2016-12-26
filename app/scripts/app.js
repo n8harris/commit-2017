@@ -15,6 +15,7 @@ angular.module('commit2017App', [
     'ngRoute',
     'ngSanitize',
     'ngProfanity',
+    'ngCountup',
     'ngTouch',
     'firebase',
     'firebase.ref'

@@ -12,7 +12,8 @@
     "angular-route": "^1.3.0",
     "angular-sanitize": "^1.3.0",
     "angular-touch": "^1.3.0",
-    "ng-profanity": "~0.0.8"
+    "ng-profanity": "~0.0.8",
+    "countup-angularjs-directive": "*"
   },
   "devDependencies": {
     "mockfirebase": "0.11.0",
