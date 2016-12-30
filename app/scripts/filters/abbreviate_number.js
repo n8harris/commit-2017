@@ -7,7 +7,7 @@ angular.module('commit2017App')
         var shortNum = value;
         var newValue = value;
         if (value >= 1000000) {
-            var suffixes = ["", "k", "m", "b","t"];
+            var suffixes = ["", "K", "M", "B","T"];
             var suffixNum = Math.floor( (""+value).length/3 );
             var shortValue = '';
             for (var precision = 2; precision >= 1; precision--) {
@@ -19,11 +19,12 @@ angular.module('commit2017App')
               shortNum = shortValue.toFixed(1);
             }
             newValue = shortValue+suffixes[suffixNum];
+            return {value: newValue, abbreviated: true};
         }
         if (newValue){
-          return newValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+          return {value: newValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","), abbreviated: false};
         } else {
-          return newValue;
+          return {value: newValue, abbreviated: false};
         }
     };
   });

@@ -40,10 +40,26 @@ h2 {
   color: #fff;
 }
 
+.notification {
+  text-align: center;
+  background: #343434;
+  padding: 0;
+  transition: padding 0.5s;
+  p {
+    font-size: 0px;
+  }
+  &.notify-active {
+    padding: 10px;
+    p {
+      font-size: 1.5em;
+    }
+  }
+}
+
 .page-wrapper {
   margin-bottom: 50px;
   .header {
-    margin-top: 10px;
+    margin-top: 15px;
     text-align: center;
     .logo {
       width: 150px;
@@ -97,14 +113,18 @@ h2 {
     }
     .hours-commited {
       font-family: 'Roboto Slab', serif;
-      font-size: 10em;
+      font-size: 6em;
       font-weight: 300;
       color: #fff;
       margin-bottom: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 
   .form-wrapper {
+    padding-top: 45px;
     text-align: center;
     margin: 0 auto;
 
@@ -125,6 +145,30 @@ h2 {
         top: 50%;
         transform: translateY(-50%);
         -webkit-transform: translateY(-50%);
+        .settings-tooltip {
+          overflow: visible;
+          position: absolute;
+          width: 120px;
+          height: 40px;
+          background: #343434;
+          border-radius: 5px;
+          padding: 10px;
+          top: -70px;
+          right: 0;
+          &::before {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 0;
+            z-index: 7;
+            border-left: 20px solid transparent;
+            border-right: 2px solid transparent;
+            border-top: 10px solid #343434;
+            bottom: -10px;
+            right: 10px;
+          }
+
+        }
       }
     }
 
@@ -311,5 +355,13 @@ h2 {
 @media screen and (min-width: 768px) {
   .container {
     max-width: 730px;
+  }
+
+  .page-wrapper {
+    .commit-wrapper {
+      .hours-commited {
+        font-size: 10em !important;
+      }
+    }
   }
 }

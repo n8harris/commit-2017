@@ -11,31 +11,69 @@ angular.module('commit2017App')
   .controller('MainCtrl', function ($scope, Ref, $q, NUM_WEEKS_YEAR, NUM_MONTHS_YEAR, NUM_DAYS_YEAR, Profanity, $rootScope, abbreviate_number) {
     removeError();
     $rootScope.showSettings = false;
+    $rootScope.notificationMessage = "";
+    $rootScope.notifyShow = false;
     $scope.numHours = 1;
     $scope.frequency = 2;
+    $scope.abbreviatedNumber = false;
     Ref.child('Counter').child('numHoursCommited').on('value', function(snapshot) {
       var hours = snapshot.val();
       if (hours){
-        $scope.numHoursCommited = abbreviate_number(hours);
+        var abbrev = abbreviate_number(hours);
+        $scope.numHoursCommited = abbrev.value;
+        $scope.abbreviatedNumber = abbrev.abbreviated;
         $scope.$apply();
       }
+    });
+
+    Ref.child('Submissions').limit(100).on('value', function(snapshot) {
+      var i = 0;
+      var foundItem = false;
+      var rand = Math.floor(Math.random() * snapshot.numChildren());
+      var submission = {};
+      var notificationPrefix = 'Someone recently committed to: "';
+      snapshot.forEach(function(snapshot) {
+        submission = snapshot.val();
+        if (submission.public && !foundItem){
+          $rootScope.notificationMessage = notificationPrefix + submission.commit + '"';
+        }
+        if (i == rand) {
+          if (submission.public){
+            $rootScope.notificationMessage = notificationPrefix + submission.commit + '"';
+            foundItem = true;
+          }
+        }
+        i++;
+      });
+      if ($rootScope.notificationMessage){
+       $rootScope.notifyShow = true;
+      }
+      $rootScope.$apply();
+      setTimeout(function(){
+        $rootScope.notificationMessage = "";
+        $rootScope.notifyShow = false;
+        $rootScope.$apply();
+      }, 10000);
     });
 
     // provide a method for adding a message
     $scope.addCommit = function(commit, email, publicCommit) {
       removeError();
-      if( commit && email ) {
-        if (!emailIsValid(email)) {
+      if( commit ) {
+        if (email && !emailIsValid(email)) {
           setError("Please enter valid email");
         } else if (Profanity.containsProfanity(commit)) {
           setError("Please watch your language :)");
         } else {
           var hours = getHours($scope.numHours, $scope.frequency);
+          if (!email){
+            email = null;
+          }
           pushCommit(commit, email, publicCommit, $scope.numHours, $scope.frequency);
           incrementCounter(hours);
         }
       } else {
-        setError("Please enter email and what you are committing to do");
+        setError("Please enter what you are committing to do");
       }
     };
 

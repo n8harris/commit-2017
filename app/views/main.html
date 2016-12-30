@@ -1,6 +1,7 @@
 <div class="row">
   <div class="col-sm-12 commit-wrapper">
-    <h2 count-up ng-model="numHoursCommited" class="hours-commited" id="hours-commited" data-animation-length="1.5"></h2>
+    <h2 count-up ng-model="numHoursCommited" class="hours-commited" id="hours-commited" data-animation-length="1.5" ng-hide="abbreviatedNumber"></h2>
+    <h2 class="hours-commited" ng-show="abbreviatedNumber">{{numHoursCommited}}</h2>
     <p>Hours Committed</p>
   </div>
 </div>
@@ -9,8 +10,10 @@
   <div class="col-sm-12 form-wrapper">
     <form>
       <div class="commit-input-wrapper">
-        <div class="settings" ng-click="openOverlay()"></div>
-        <input class="text-box commit" placeholder="I commit to..." ng-model="commit">
+        <div class="settings" ng-click="openOverlay()">
+          <div class="settings-tooltip"><p>How often?</p></div>
+        </div>
+        <input class="text-box commit" placeholder="I commit to... e.g. Prayer" ng-model="commit">
       </div>
       <input class="text-box" placeholder="Email" ng-model="email">
       <div class="col-sm-10 public-confirm">
@@ -39,7 +42,7 @@
       <div class="col-sm-12">
         <h2>How many hours will you commit?</h2>
         <input class="text-box" placeholder="e.g. 3" ng-model="numHours">
-        <h2 class="often-header">How often?</h2>
+        <h2 class="often-header">How frequently?</h2>
         <div class="col-sm-4">
           <button ng-click="frequency = 1;" ng-class="frequency == 1 ? 'green-btn green-active' : 'green-btn'">Every Day</button>
         </div>
